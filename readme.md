@@ -27,12 +27,12 @@ api-miniblog/
 ├── package.json
 └── README.md
 
-Requisitos
+##Requisitos
 	•	Node.js instalado
 	•	PostgreSQL instalado
 	•	VSCode recomendado
 
-Pasos para ejecutar local
+##Pasos para ejecutar local
 
 1. Clonar repositorio
 git clone TU_URL_DEL_REPOSITORIO
@@ -60,18 +60,18 @@ psql -U postgres -d miniblog_db -f sql/seed.sql
 6. Levantar servidor
 npm run dev
 
-URL local
+##URL local
 	•	API: http://localhost:3000
 	•	Swagger UI: http://localhost:3000/docs
 
-Cómo ejecutar tests
+##Cómo ejecutar tests
 npm test
 
-Cómo ejecutar la documentación OpenAPI
+##Cómo ejecutar la documentación OpenAPI
 La documentación está en openapi.yaml y se visualiza con Swagger UI en:
 http://localhost:3000/docs
 
-Deployment en Railway
+##Deployment en Railway
 
 Variables de entorno
 	•	PORT

@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use('/authors', authorsRoutes);
+app.use('/api/authors', authorsRoutes);
 app.use('/posts', postsRoutes);
 
 app.use(notFound);

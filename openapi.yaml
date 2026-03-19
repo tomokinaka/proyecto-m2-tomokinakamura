@@ -1,0 +1,281 @@
+openapi: 3.0.3
+info:
+  title: MiniBlog API
+  version: 1.0.0
+  description: API REST para gestionar authors y posts de un miniblog
+
+servers:
+  - url: http://localhost:3000
+    description: Servidor local
+  - url: https://tu-app.railway.app
+    description: Servidor configurado por entorno
+
+tags:
+  - name: Authors
+    description: Operaciones sobre autores
+  - name: Posts
+    description: Operaciones sobre posts
+
+paths:
+  /authors:
+    get:
+      tags: [Authors]
+      summary: Obtener todos los autores
+      responses:
+        '200':
+          description: Lista de autores
+    post:
+      tags: [Authors]
+      summary: Crear un nuevo autor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorInput'
+      responses:
+        '201':
+          description: Autor creado
+        '400':
+          description: Error de validación
+        '409':
+          description: Email duplicado
+
+  /authors/{id}:
+    get:
+      tags: [Authors]
+      summary: Obtener un autor por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Autor encontrado
+        '404':
+          description: Autor no encontrado
+
+    put:
+      tags: [Authors]
+      summary: Actualizar un autor (soporta actualización parcial)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorUpdateInput'
+      responses:
+        '200':
+          description: Autor actualizado
+        '400':
+          description: Error de validación
+        '404':
+          description: Autor no encontrado
+
+    delete:
+      tags: [Authors]
+      summary: Eliminar un autor
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Autor eliminado
+        '404':
+          description: Autor no encontrado
+
+  /posts:
+    get:
+      tags: [Posts]
+      summary: Obtener todos los posts
+      responses:
+        '200':
+          description: Lista de posts
+
+    post:
+      tags: [Posts]
+      summary: Crear un nuevo post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostInput'
+      responses:
+        '201':
+          description: Post creado
+        '400':
+          description: Error de validación
+
+  /posts/{id}:
+    get:
+      tags: [Posts]
+      summary: Obtener un post por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Post encontrado
+        '404':
+          description: Post no encontrado
+
+    put:
+      tags: [Posts]
+      summary: Actualizar un post
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostUpdateInput'
+      responses:
+        '200':
+          description: Post actualizado
+        '400':
+          description: Error de validación
+        '404':
+          description: Post no encontrado
+
+    delete:
+      tags: [Posts]
+      summary: Eliminar un post
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Post eliminado
+        '404':
+          description: Post no encontrado
+
+  /posts/author/{authorId}:
+    get:
+      tags: [Posts]
+      summary: Obtener posts de un autor
+      parameters:
+        - in: path
+          name: authorId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Lista de posts del autor
+
+components:
+  schemas:
+    Author:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Ana Torres
+        email:
+          type: string
+          example: ana@example.com
+        bio:
+          type: string
+          example: Autora de tecnología
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    AuthorInput:
+      type: object
+      required: [name, email]
+      properties:
+        name:
+          type: string
+          example: Ana Torres
+        email:
+          type: string
+          example: ana@example.com
+        bio:
+          type: string
+          example: Autora de tecnología
+
+    AuthorUpdateInput:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        bio:
+          type: string
+
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: Mi primer post
+        content:
+          type: string
+          example: Este es el contenido del post
+        author_id:
+          type: integer
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    PostInput:
+      type: object
+      required: [title, content, author_id]
+      properties:
+        title:
+          type: string
+          example: Mi primer post
+        content:
+          type: string
+          example: Este es el contenido del post
+        author_id:
+          type: integer
+          example: 1
+
+    PostUpdateInput:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        author_id:
+          type: integer

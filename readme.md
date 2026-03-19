@@ -27,7 +27,7 @@ api-miniblog/
 ├── package.json
 └── README.md
 
-## Requisitos
+## Requisito
 	•	Node.js instalado
 	•	PostgreSQL instalado
 	•	VSCode recomendado

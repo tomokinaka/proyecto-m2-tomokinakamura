@@ -1,6 +1,7 @@
 # MiniBlog API
 
 API REST desarrollada con Node.js, Express y PostgreSQL para gestionar autores y posts de un miniblog.
+#Mi Link de Raillway: https://proyecto-m2-tomokinakamura-production.up.railway.app/
 
 ## Descripción del proyecto
 Este proyecto implementa una API REST con operaciones CRUD para autores y publicaciones. Incluye persistencia real en PostgreSQL, documentación OpenAPI con Swagger UI, validaciones, manejo global de errores y pruebas automatizadas.

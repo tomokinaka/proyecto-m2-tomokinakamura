@@ -14,7 +14,8 @@ async function startServer() {
       console.log(`Swagger disponible en http://localhost:${PORT}/docs`);
     });
   } catch (error) {
-    console.error('Error al iniciar el servidor:', error.message);
+   console.error("Error al iniciar el servidor:", error.message);
+console.error(error);
     process.exit(1);
   }
 }
